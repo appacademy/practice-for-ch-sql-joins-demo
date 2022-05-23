@@ -4,9 +4,7 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.text :body, null: false
       t.references :author, null: false, foreign_key: { to_table: :users }
       t.references :post, null: false, foreign_key: true
-      # Since parent_comment_id can be NULL, don't set it with a foreign key
-      # constraint
-      t.references :parent_comment
+      t.references :parent_comment, foreign_key: { to_table: :comments }
 
       t.timestamps
     end
